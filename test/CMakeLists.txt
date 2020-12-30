@@ -1,0 +1,7 @@
+add_executable(packetatorTest main.cpp TCPIPNetworkStack/tcp_ip_network_stack.cpp PcapReplayNetworkStack/pcap_replay_network_stack.cpp TCPIPNetworkStack/neighbor_table.cpp TCPIPNetworkStack/route_table.cpp TCPIPNetworkStack/network_stack.cpp TCPIPNetworkStack/mock_network_device.h TCPIPNetworkStack/mock_network_interface.h TCPIPNetworkStack/tcp_flow.cpp TCPIPNetworkStack/udp_flow.cpp TCPIPNetworkStack/connection_table.cpp TCPIPNetworkStack/application_classifier.cpp)
+target_link_libraries(packetatorTest packetatorLibUnitTest)
+target_link_libraries(packetatorTest pthread)
+target_link_libraries(packetatorTest gmock)
+target_link_libraries(packetatorTest CustomHTTParserLib)
+target_link_libraries(packetatorTest CustomFTParserLib)
+target_link_libraries(packetatorTest tins)

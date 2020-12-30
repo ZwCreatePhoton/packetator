@@ -1,0 +1,77 @@
+---
+early_address_resolution: true
+early_address_resolution_ping: false
+early_arp: false
+early_garp_request: true
+early_garp_reply: true
+early_unsolicited_na: true
+
+stop_on_unexpected_rst: false
+stop_on_unexpected_fin: false
+
+remove_time_outlier_seconds: 300
+remove_time_outlier_packet: true
+
+honor_time_delta_min_microseconds: 300
+honor_time_delta_previous_tx: true
+
+tx_event_internet: true
+tx_event_packet_count: true
+tx_event_datagram_count: false
+
+tx_event_transport: false
+tx_event_packet_count_if_no_transport: false
+tx_event_datagram_count_if_no_transport: false
+tx_event_udp_all_connections: false
+tx_event_udp_data: false
+tx_event_tcp_all_connections: false
+tx_event_tcp_segment_count: false
+tx_event_tcp_state: false
+tx_event_tcp_data: false
+
+tx_event_udp_application: false
+tx_event_tcp_application: false
+tx_event_http: false
+tx_event_http_state: false
+tx_event_http_state_header_count_nonzero: false
+tx_event_http_header_count_nonzero: false
+tx_event_http_header_count: false
+tx_event_http_raw_body: false
+tx_event_http_normalized_body: false
+tx_event_http_normalized_body_chunking: false
+tx_event_dns: false
+tx_event_dns_question_section: false
+tx_event_dns_response_section: false
+tx_event_dns_authority_section: false
+tx_event_dns_additional_section: false
+tx_event_ftp: false
+tx_event_ftp_request: false
+tx_event_ftp_request_command: false
+tx_event_ftp_request_arguments: false
+tx_event_ftp_reply: false
+tx_event_ftp_reply_code: false
+tx_event_ftp_reply_message: false
+
+modify_internet: true
+modify_transport: false
+modify_udp_sport_if_client: false
+modify_udp_dport_if_server: false
+modify_udp_dport_if_client: false
+modify_udp_sport_if_server: false
+modify_udp_data: false
+modify_udp_data_allow_shrinkage: false
+modify_udp_data_allow_growth: false
+modify_tcp_sport_if_client: false
+modify_tcp_dport_if_server: false
+modify_seq: false
+modify_ack_2: false
+modify_tcp_timestamps: false
+modify_tcp_data: false
+modify_tcp_data_allow_shrinkage: false
+modify_tcp_data_allow_growth: false
+modify_application: false
+modify_ftp_reply_banner_ip: false
+modify_ftp_reply_passive_ip: false
+modify_ftp_request_passive_ip: false
+modify_dns_request_tid: false
+modify_dns_response_tid: false

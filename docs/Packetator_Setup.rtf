@@ -1,0 +1,182 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\froman\fcharset0 TimesNewRomanPSMT;}{\f1\ftech\fcharset2 Symbol;}{\f2\fmodern\fcharset0 CourierNewPSMT;}{\f3\fnil Arial;}{\f4\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue255;\red255\green86\blue48;}
+{\*\listtable 
+{\list\listhybrid
+{\listlevel\levelnfc23\leveljc0\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f4\jclisttab\tx0}
+{\listlevel\levelnfc23\leveljc0\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f4\jclisttab\tx0}\listid1 }
+{\list\listhybrid
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'00.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc23\leveljc0\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f4\jclisttab\tx0}\listid2 }
+{\list\listhybrid
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'00.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc23\leveljc0\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f4\jclisttab\tx0}\listid3 }
+{\list\listhybrid
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'00.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc23\leveljc0\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f4\jclisttab\tx0}\listid4 }
+{\list\listhybrid
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'00.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc23\leveljc0\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f4\jclisttab\tx0}\listid5 }
+{\list\listhybrid
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'00.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc23\leveljc0\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f4\jclisttab\tx0}\listid6 }}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sb100\sa100\b\f0\fs48\lang9 Packetator Setup\par
+\b0\fs24 Setup commands are for a fresh install of Debian 10. Seek alternative commands for other flavors of linux.\par
+\b\fs48 (Virtual) Hardware Requirements:\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls1\fi-360\li720\sb100\sa100\tx720\b0\f1\fs20\'a5\tab\f0\fs24 At least 4 maybe 2 processor cores. 8 is nice. Packetator(tots) is CPU-bound so the more computing power the better.\par
+{\listtext\f0 1\tab}\f1\fs20\'a5\tab\f0\fs24 ~ 1 GB / core. You\rquote ll need enough so that swap space is never used when running Packetator(tots). Use {{\field{\*\fldinst{HYPERLINK "https://linux.die.net/man/"}}{\fldrslt{\ul\cf1\cf1\ulc1\ul top}}}}\f0\fs24  to confirm swap space is not being used when running Packetator(tots).\par
+{\listtext\f0 2\tab}\f1\fs20\'a5\tab\f0\fs24 Enough free disk space to store many times the size the pcaps to be replayed.\par
+{\listtext\f0 3\tab}\f1\fs20\'a5\tab\f0\fs24 2 dedicated nics connected to networks that are ideally clear of multicast traffic. If its not you\rquote ll have to blacklist the addresses of other devices on the network. Blacklist not required when running with packetator argument: \lquote --ccm FiveTuple\rquote\par
+{\listtext\f0 4\tab}\f1\fs20\'a5\tab\f0\fs24 Optional: If the nics are connected to ESXI virtual switches, enable {{\field{\*\fldinst{HYPERLINK "https://docs.vmware.c"}}{\fldrslt{\ul\cf1\cf1\ulc1\ul promiscuous mode}}}}\f0\fs24  to make use of the following features:\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls1\ilvl1\fi-360\li1440\sb100\sa100\tx1440\f2\fs20 o\tab\f0\fs24 randomization of mac addresses\par
+{\listtext\f0 1\tab}\f2\fs20 o\tab\f0\fs24 randomization of the last 3 bytes of IPv6 addresses\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls1\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 Optional: Enable jumbo frames / set MTU to 9000 to make use of the following features:\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls1\ilvl1\fi-360\li1440\sb100\sa100\tx1440\f2\fs20 o\tab\f0\fs24 replay pcaps with jumbo frames\par
+{\listtext\f0 1\tab}\f2\fs20 o\tab\f0\fs24 replay pcaps in L5 mode where application data (might) increase in size and result in a packet being larger than 1500 bytes\par
+
+\pard\sb100\sa100\b\fs48 Dependencies:\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li720\sb100\sa100\tx720\b0\f1\fs20\'a5\tab\f0\fs24 cmake >= 3.13\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li1440\sb100\sa100\tx1440\f2\fs20 o\tab\f0\fs24 to build\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 python3.8\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li1440\sb100\sa100\tx1440\f2\fs20 o\tab\f0\fs24 to run\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 libpcap\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li1440\sb100\sa100\tx1440\f2\fs20 o\tab\f0\fs24 to run\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 git\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls2\ilvl1\fi-360\li1440\sb100\sa100\tx1440\f2\fs20 o\tab\f0\fs24 for cloning the repo\par
+
+\pard\sb100\sa100\b\fs36 Install cmake:\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\b0\f2\fs20 whereis cmake\par
+su -\par
+apt update\par
+apt -y install cmake\f0\par
+
+\pard\sb100\sa100\b\fs36 Install python3.8:\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\b0\f2\fs20 whereis python3.8\par
+su -\par
+apt update\par
+apt -y install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl\par
+cd /tmp\par
+curl -O {{\field{\*\fldinst{HYPERLINK https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz }}{\fldrslt{https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz\ul0\cf0}}}}\f2\fs20\par
+tar -xf Python-3.8.2.tar.xz\par
+cd Python-3.8.2\par
+./configure --enable-optimizations\par
+make -j `nproc`\par
+make altinstall\f0\par
+
+\pard\sb100\sa100\b\fs36 Install libpcap:\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\b0\f2\fs20 su -\par
+apt update\par
+apt -y install libpcap-dev\f0\par
+
+\pard\sb100\sa100\b\fs36 Install git:\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\b0\f2\fs20 whereis git\par
+su -\par
+apt update\par
+apt -y install git\f0\par
+
+\pard\sb100\sa100\b\fs48 Install packetator:\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\b0\f2\fs20 su -\par
+# unzip full source or clone repo + pull submodules\par
+cd packetator\par
+python3.8 -m pip install -r requirements.txt\par
+mkdir build\par
+cd build\par
+cmake -DCMAKE_BUILD_TYPE=Release ../\par
+make -j `nproc`\par
+# binaries will be in the 'bin' directory\f0\par
+
+\pard\sb100\sa100\b\fs48 Other:\par
+\fs36 Enable jumbo frames:\par
+\b0\fs24 This is required if replaying pcaps with packets >= 1500 bytes in size.\f3\line\f0 This should be done for each interface being used. \cf2 Note: this does not stick across reboots!\cf0\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\f2\fs20 ip link set eth1 mtu 9000\par
+ip link set eth2 mtu 9000\f0\par
+
+\pard\sb100\sa100\b\fs36 Assign IPv6 addresses:\par
+\b0\fs24 Assign IPv6 addresses to the interfaces you\rquote ll be using. This is required if promiscuous mode is NOT enabled on the switches the host is connected to.\f3\line\f0 Take note of the last 3 bytes of the IPv6 address of each interface\par
+\b\fs48 Configuration:\par
+\fs36 Clean up noise on the network:\par
+\b0\fs24 Multicast traffic noise on the network (like DHCP) can mess up results when running with the \ldblquote FourTuple\ldblquote  Connection conversion method ('--ccm FourTuple'). This is default.\f3\line\f0 For each nic take a packet capture. Let them run for a while.\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\f2\fs20 ssh root@1.2.3.4 tcpdump -i eth1 -U -s0 -w - 'port !22' | wireshark -k -i -\par
+ssh root@1.2.3.4 tcpdump -i eth2 -U -s0 -w - 'port !22' | wireshark -k -i -\par
+
+\pard\sb100\sa100\f0\fs24 Take note of addresses in any of the multicast Ethernet traffic, multicast IPv4 traffic, and multicast IPv6 traffic you see. (Exclude ARP & NDP) \f3\line\f0 Including the blacklisted addresses in a yaml file using resources/configs/packetatortots/example_block.yaml as an example.\f3\line\f0 All addresses of all hosts on the network(s) should be included in the blacklist to avoid IP conflicts.\f3\line\cf2\f0 Don\rquote t include the gateway in the blacklist!\cf0\par
+\b\fs36 Interfaces:\par
+\b0\fs24 Use resources/configs/packetatortots/example_nics.yaml as an example.\f3\line\f0 'gateway'/'gateway_v6' do not have to be specified when there isn\rquote t one. (but it can if you want to keep the same yaml for both L2 and L3 devices)\f3\line\f0 'last_bytes_v6' needs to be set to the last 3 bytes of any of the IPv6 addresses assigned to that interface if promiscuous mode is NOT enabled on the switches the host is connected to. Otherwise it can be set to whatever value like 0x000000\par
+\b\fs36 Modes:\par
+\b0\fs24 Modes can be restricted on a per pcap basis.\f3\line\f0 The format is: pcap filename, lowest mode , highest mode\f3\line\f0 Use resources/configs/packetatortots/strike_modes.csv as an example\par
+\b\fs48 Test it:\par
+\fs24 Environment\b0 :\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls3\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 routed\par
+{\listtext\f0 1\tab}\f1\fs20\'a5\tab\f0\fs24 no promiscuous mode enabled on (v)switch\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\f2\fs20 ./packetatortots.py -t 300 -N 3 -b ../../resources/configs/packetatortots/example_block.yaml -o results.csv -dm L4 -m exception_modes.csv -od out -j 40 -n nics.yaml -d ../../resources/pcaps/ben.pcap -- --ccm FiveTuple -r -w\par
+
+\pard\sb100\sa100\b\f0\fs24 Explanation\b0 :\par
+
+\pard\li450\sb100\sa100 (\f2\fs20 -t 300\f0\fs24 ) set a timeout of 300 seconds for each pcap replay. After 300 seconds the specific timed out replay will be terminated\f3\line\f0 (\f2\fs20 -N 3\f0\fs24 ) replay each pcap a total of 3 times. \f3\line\f0 (\f2\fs20 -b ../../resources/configs/packetatortots/example_block.yaml\f0\fs24 ) block traffic from the other hosts on the network listed in example_block.yaml. Since \f2\fs20 --ccm FiveTuple\f0\fs24  is being used, this argument is optional.\f3\line\f0 (\f2\fs20 -o results.csv\f0\fs24 ) output the results in csv format to results.csv\f3\line\f0 (\f2\fs20 -dm L4)\f0\fs24  run pcaps in mode: L4\f3\line\f0 (\f2\fs20 -m exception_modes.csv\f0\fs24 ) for pcaps with an entry in exception_modes.csv, the specified minimum and maximum modes will be applied\f3\line\f0 (\f2\fs20 -od out\f0\fs24 ) out will be an output directory\f3\line\f2\fs20 (-j 40\f0\fs24 ) replay 40 pcaps in parallel\f3\line\f0 (\f2\fs20 -n nics.yaml\f0\fs24 ) use the nic configuration specified in nics.yaml\f3\line\f0 (\f2\fs20 ../../resources/pcaps/ben.pcap\f0\fs24 ) replay this pcap (or directory of pcaps)\f3\line\f0 (\f2\fs20 --\f0\fs24 ) the arguments after \ldblquote --\ldblquote  will be passed onto the program \i packetator\i0\f3\line\f0 (\f2\fs20 --ccm FiveTuple\f0\fs24 ) use the 5 tuple: (sip, dip, sport, dport, proto) instead of the 4 tuple: (sip, dip, serverport, proto) to correlate connections between the pcap and live traffic. --ccm FiveTuple should be used unless a proxy device has different 5 tuples on each side on a connection.\f3\line\f0 (\f2\fs20 -r\f0\fs24 ) run in routed mode and use the gateway that was specified in nics.yaml\f3\line\f0 (\f2\fs20 -w\f0\fs24 ) take a packet capture of the replayed traffic. For each pcap run, each host will have its own packet capture file\par
+
+\pard\sb100\sa100\b Environment\b0 :\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls4\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 non-routed\par
+{\listtext\f0 1\tab}\f1\fs20\'a5\tab\f0\fs24 no promiscuous mode enabled on (v)switch\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\f2\fs20 ./packetatortots.py -t 300 -N 3 -b ../../resources/configs/packetatortots/example_block.yaml -o results.csv -dm L4 -m exception_modes.csv -od out -j 40 -n nics.yaml -d ../../resources/pcaps/ben.pcap -- --ccm FiveTuple -w\par
+
+\pard\sb100\sa100\b\f0\fs24 Environment\b0 :\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls5\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 routed\par
+{\listtext\f0 1\tab}\f1\fs20\'a5\tab\f0\fs24 promiscuous mode enabled on (v)switch:\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\f2\fs20 ./packetatortots.py -t 300 -N 3 -rm -ri6 -b ../../resources/configs/packetatortots/example_block.yaml -o results.csv -dm L4 -m exception_modes.csv -od out -j 40 -n nics.yaml -d ../../resources/pcaps/ipv6_http_ben.pcap -- --ccm FiveTuple -r -w\par
+
+\pard\sb100\sa100\b\f0\fs24 Explanation\b0 :\par
+
+\pard\li450\sb100\sa100\f2\fs20 (-rm\f0\fs24 ) randomize mac addresses\f3\line\f0 (\f2\fs20 -ri6\f0\fs24 ) randomize the last 3 bytes of ip6 addresses\par
+
+\pard\sb100\sa100\b Environment\b0 :\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls6\ilvl1\fi-360\li720\sb100\sa100\tx720\f1\fs20\'a5\tab\f0\fs24 routed\par
+{\listtext\f0 1\tab}\f1\fs20\'a5\tab\f0\fs24 promiscuous mode enabled on (v)switch:\par
+
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\f2\fs20 ./packetatortots.py -t 300 -N 3 -rm -ri6 -b ../../resources/configs/packetatortots/example_block.yaml -o results.csv -dm L4 -m exception_modes.csv -od out -j 40 -n nics.yaml -d ../../resources/pcaps/ipv6_http_ben.pcap -- --ccm FiveTuple -w\par
+
+\pard\sb100\sa100\f3\fs24\line\f0 For full usage see: \f3\line\f0 ./packetatortots.py --help\f3\line\f0 ./packetator --help\par
+}
+ 

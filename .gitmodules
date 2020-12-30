@@ -1,0 +1,21 @@
+[submodule "submodules/tclap"]
+	path = submodules/tclap
+	url = https://github.com/mirror/tclap
+[submodule "submodules/customhttparser"]
+	path = submodules/customhttparser
+	url = https://github.com/CreatePhotonW/customhttparser.git
+[submodule "submodules/googletest"]
+	path = submodules/googletest
+	url = https://github.com/google/googletest
+[submodule "submodules/yaml-cpp"]
+	path = submodules/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "submodules/libtins"]
+	path = submodules/libtins
+	url = https://github.com/CreatePhotonW/libtins.git
+[submodule "submodules/libpcap"]
+	path = submodules/libpcap
+	url = https://github.com/the-tcpdump-group/libpcap.git
+[submodule "submodules/customftparser"]
+	path = submodules/customftparser
+	url = https://github.com/CreatePhotonW/customftparser.git

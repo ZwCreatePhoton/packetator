@@ -1,0 +1,77 @@
+---
+early_address_resolution: true
+early_address_resolution_ping: false
+early_arp: false
+early_garp_request: true
+early_garp_reply: true
+early_unsolicited_na: true
+
+stop_on_unexpected_rst: true
+stop_on_unexpected_fin: false
+
+remove_time_outlier_seconds: 300
+remove_time_outlier_packet: true
+
+honor_time_delta_min_microseconds: 300
+honor_time_delta_previous_tx: true
+
+tx_event_internet: true
+tx_event_packet_count: false
+tx_event_datagram_count: false
+
+tx_event_transport: true
+tx_event_packet_count_if_no_transport: true
+tx_event_datagram_count_if_no_transport: false
+tx_event_udp_all_connections: true
+tx_event_udp_data: true
+tx_event_tcp_all_connections: true
+tx_event_tcp_segment_count: false
+tx_event_tcp_state: true
+tx_event_tcp_data: true
+
+tx_event_udp_application: true
+tx_event_tcp_application: true
+tx_event_http: true
+tx_event_http_state: true
+tx_event_http_state_header_count_nonzero: true
+tx_event_http_header_count_nonzero: false
+tx_event_http_header_count: false
+tx_event_http_raw_body: false
+tx_event_http_normalized_body: true
+tx_event_http_normalized_body_chunking: true
+tx_event_dns: true
+tx_event_dns_question_section: true
+tx_event_dns_response_section: true
+tx_event_dns_authority_section: true
+tx_event_dns_additional_section: true
+tx_event_ftp: true
+tx_event_ftp_request: true
+tx_event_ftp_request_command: true
+tx_event_ftp_request_arguments: false
+tx_event_ftp_reply: true
+tx_event_ftp_reply_code: true
+tx_event_ftp_reply_message: false
+
+modify_internet: true
+modify_transport: true
+modify_udp_sport_if_client: false
+modify_udp_dport_if_server: true
+modify_udp_dport_if_client: true
+modify_udp_sport_if_server: true
+modify_udp_data: true
+modify_udp_data_allow_shrinkage: true
+modify_udp_data_allow_growth: true
+modify_tcp_sport_if_client: false
+modify_tcp_dport_if_server: true
+modify_seq: true
+modify_ack_2: true
+modify_tcp_timestamps: true
+modify_tcp_data: true
+modify_tcp_data_allow_shrinkage: true
+modify_tcp_data_allow_growth: true
+modify_application: true
+modify_ftp_reply_banner_ip: true
+modify_ftp_reply_passive_ip: true
+modify_ftp_request_passive_ip: true
+modify_dns_request_tid: false
+modify_dns_response_tid: false
