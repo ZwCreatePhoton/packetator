@@ -120,7 +120,7 @@ See the doc: [Packetator_Setup.rtf](docs/Packetator_Setup.rtf)
 ## Usage
 For standard usage, refer to the doc: [packetatortors.rtf](docs/packetatortots.rtf)
 
-For advanced usage, refer to the doc: [packetator.rtf](dpcs/packetator.rtf)
+For advanced usage, refer to the doc: [packetator.rtf](docs/packetator.rtf)
 
 <!-- ROADMAP -->
 ## Roadmap
