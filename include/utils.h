@@ -1,6 +1,7 @@
 #include <map>
 #include <vector>
 #include <cstring>
+#include <string>
 
 #pragma once
 static bool debug_output = false;
