@@ -17,15 +17,15 @@ Tins::PacketSender * Networking::GetTransmitter(const std::string& interfaceName
     return transmitter_map[interfaceName];
 }
 
-Tins::Sniffer * Networking::GetReciever(const std::string& interfaceName, const std::string& mac_address, const std::string ip_address, const std::vector<std::string>& all_ipaddresses, const std::vector<std::string>& mac_blacklist)
+Tins::Sniffer * Networking::GetReciever(const std::string& interfaceName, const std::string& mac_address, const std::string ip_address, const std::vector<std::string>& all_ipaddresses, const std::vector<std::string>& mac_blocklist)
 {
     bool no_ip = ip_address.empty();
     bool is_ipv4 = ip_address.find('.') != std::string::npos;
 
     std::stringstream fmt;
-    if (!mac_blacklist.empty())
+    if (!mac_blocklist.empty())
     {
-        for (auto &m : mac_blacklist)
+        for (auto &m : mac_blocklist)
             fmt << "(not ether host " << m << ") and ";
     }
     fmt << "not ether src " << mac_address; // Dont capture our outgoing frames

@@ -12,9 +12,9 @@ void PcapReplayNetworkStack::start_packet_capture()
     std::string pcap_output_path = convert_ip_address(netdev.ip_address, false) + "_" + netdev.ip_address + ".pcap";
 
     std::stringstream fmt;
-    if (!netdev.mac_blacklist.empty())
+    if (!netdev.mac_blocklist.empty())
     {
-        for (auto &m : netdev.mac_blacklist)
+        for (auto &m : netdev.mac_blocklist)
             fmt << "(not ether host " << m << ") and ";
     }
     fmt << "( (ether src " << netdev.mac_address << ")"; // capture our outgoing frames

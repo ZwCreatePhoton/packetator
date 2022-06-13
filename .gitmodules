@@ -1,21 +1,18 @@
-[submodule "submodules/tclap"]
-	path = submodules/tclap
+[submodule "external/tclap"]
+	path = external/tclap
 	url = https://github.com/mirror/tclap
-[submodule "submodules/customhttparser"]
-	path = submodules/customhttparser
+[submodule "external/customhttparser"]
+	path = external/customhttparser
 	url = https://github.com/ZwCreatePhoton/customhttparser.git
-[submodule "submodules/googletest"]
-	path = submodules/googletest
+[submodule "external/googletest"]
+	path = external/googletest
 	url = https://github.com/google/googletest
-[submodule "submodules/yaml-cpp"]
-	path = submodules/yaml-cpp
+[submodule "external/yaml-cpp"]
+	path = external/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
-[submodule "submodules/libtins"]
-	path = submodules/libtins
+[submodule "external/libtins"]
+	path = external/libtins
 	url = https://github.com/ZwCreatePhoton/libtins.git
-[submodule "submodules/libpcap"]
-	path = submodules/libpcap
-	url = https://github.com/the-tcpdump-group/libpcap.git
-[submodule "submodules/customftparser"]
-	path = submodules/customftparser
+[submodule "external/customftparser"]
+	path = external/customftparser
 	url = https://github.com/ZwCreatePhoton/customftparser.git

@@ -122,15 +122,14 @@ void cmdline_run(int argc, char** argv)
         TCLAP::CmdLine cmd("Packet replay tool", ' ', "1.0");
 
         TCLAP::ValuesConstraint<std::string> allowed_ccmVals( {"FourTuple", "FiveTuple"} );
-        TCLAP::ValueArg<std::string> connection_conversion_method("","ccm","Connection conversion method. (This is an implementation detail)", false, "FourTuple", &allowed_ccmVals, cmd);
+        TCLAP::ValueArg<std::string> connection_conversion_method("","ccm","Connection conversion method. Defaults to FiveTuple.", false, "FiveTuple", &allowed_ccmVals, cmd);
         TCLAP::MultiArg<std::string> ip_addresses("a","address",R"(IP address of the host to be simulated followed by a comma "," and name of the interface to use for this host followed by (optionally) a comma "," and the mac address to use for this host)",true,"x.x.x.x,eth0,00:11:22:33:44:55", cmd);
         TCLAP::MultiArg<std::string> ip_address_map("m","map-address","Map IP address from the pcap to the IP address of the host to be simulated (format: 'x.x.x.x=y.y.y.y')",true,"x.x.x.x=y.y.y.y", cmd);
         TCLAP::ValueArg<std::string> pcapPath("p","pcap","filepath to the pcap to replay",true,"some.pcap","path/file.pcap", cmd);
         TCLAP::ValueArg<int> timeout("t", "timeout","timeout in seconds", false, 10, "int", cmd);
         TCLAP::MultiArg<std::string> configs("c", "config", "configuration file", true, "config.yaml", cmd);
-        TCLAP::ValueArg<std::string> blacklist("b", "blacklist", "yaml document with (mac) addresses to blacklist.", false, "", "yaml file", cmd);
+        TCLAP::ValueArg<std::string> blocklist("b", "blocklist", "yaml document with (mac) addresses to blocklist.", false, "", "yaml file", cmd);
         TCLAP::SwitchArg packet_capture("w","packet_capture","Take packet capture.", cmd, false);
-        TCLAP::SwitchArg same_side("","same_side","Set this if both nics are plugged into the same switch. This should only have an effect if in routed mode", cmd, false);
         TCLAP::SwitchArg routed("r","routed","Set this if there is a layer 3 device inline. The gateway(s) addresses should be set appropriately.", cmd, false);
         TCLAP::MultiArg<std::string> gateways("g","gateway","The default gateway for the NIC",false,"x.x.x.x", cmd);
         TCLAP::MultiArg<std::string> subnets("s","subnet","the subnet of the network the NIC interface connects to",true,"x.x.x.x/n", cmd);
@@ -197,16 +196,16 @@ void cmdline_run(int argc, char** argv)
             nics.push_back(move(nic));
         }
 
-        // blacklists
-        std::vector<std::string> mac_blacklist{};
-        std::string blacklist_file = blacklist.getValue();
-        if (!blacklist_file.empty())
+        // blocklists
+        std::vector<std::string> mac_blocklist{};
+        std::string blocklist_file = blocklist.getValue();
+        if (!blocklist_file.empty())
         {
-            YAML::Node yaml = YAML::LoadFile(blacklist_file);
+            YAML::Node yaml = YAML::LoadFile(blocklist_file);
             auto mac_bl = yaml["mac"];
             for (auto && i : mac_bl)
             {
-                mac_blacklist.push_back(i.as<std::string>());
+                mac_blocklist.push_back(i.as<std::string>());
             }
         }
 
@@ -226,7 +225,6 @@ void cmdline_run(int argc, char** argv)
         PcapReplayNetworkStackConfig config(pcap_path, pcap_ip_map);
         for (const auto &config_path : configs.getValue())
             parse_config(config, config_path);
-        config.same_side = same_side.getValue() ? true : config.same_side;
         config.l3_device = routed.getValue() ? true : config.l3_device;
         config.stop_on_timeout = timeout.getValue() != 0;
         config.timeout_duration = std::chrono::seconds(timeout.getValue());
@@ -322,7 +320,7 @@ void cmdline_run(int argc, char** argv)
 
             auto *interface = new Tins::NetworkInterface(nic->name);
             auto mac_address = !hw_address.empty() ? hw_address : interface->hw_address().to_string();
-            auto *netdev = new NetworkDevice(*interface, all_ipaddresses,  ip_addr, mask, mac_address, mac_blacklist);
+            auto *netdev = new NetworkDevice(*interface, all_ipaddresses,  ip_addr, mask, mac_address, mac_blocklist);
             if (!nic->gateway.empty())
                 netdev->gateway = nic->gateway;
             auto netstack = std::make_unique<PcapReplayNetworkStack>(*netdev, config);

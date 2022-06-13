@@ -9,7 +9,7 @@ using std::pair;
 PcapReplayNetworkStack::PcapReplayNetworkStack(NetworkDevice &networkDevice, PcapReplayNetworkStackConfig &config) : TCPIPNetworkStack(networkDevice), config(config), pcap_ip_map(config.pcap_ip_map)
 {
     runtime_arp_reponse_wait = config.wait_for_arp_response;
-    if (config.l3_device) // ensure this works for L2 devices
+    if (config.l3_device)
     {
         init_route_table();
     }

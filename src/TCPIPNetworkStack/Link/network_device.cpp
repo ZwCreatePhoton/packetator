@@ -28,7 +28,7 @@ NetworkDevice::NetworkDevice(Tins::NetworkInterface networkInterface, std::vecto
 }
 
 NetworkDevice::NetworkDevice(Tins::NetworkInterface networkInterface, std::vector<std::string> all_ipaddresses, std::string ip_address,
-                             std::string mask, std::string mac, std::vector<std::string> mac_blacklist) : _networkInterface(networkInterface), ip_address(std::move(ip_address)), ip_mask(std::move(mask)), all_ipaddresses(std::move(all_ipaddresses)), _mac_address(networkInterface.hw_address().to_string()),  mac_address(std::move(mac)), mac_blacklist(std::move(mac_blacklist))
+                             std::string mask, std::string mac, std::vector<std::string> mac_blocklist) : _networkInterface(networkInterface), ip_address(std::move(ip_address)), ip_mask(std::move(mask)), all_ipaddresses(std::move(all_ipaddresses)), _mac_address(networkInterface.hw_address().to_string()),  mac_address(std::move(mac)), mac_blocklist(std::move(mac_blocklist))
 {
     init();
 }
@@ -63,5 +63,5 @@ void NetworkDevice::init()
     name = "whatever0";
 
     sender = networking.GetTransmitter(_name);
-    sniffer = networking.GetReciever(_name, mac_address, ip_address, all_ipaddresses, mac_blacklist);
+    sniffer = networking.GetReciever(_name, mac_address, ip_address, all_ipaddresses, mac_blocklist);
 }

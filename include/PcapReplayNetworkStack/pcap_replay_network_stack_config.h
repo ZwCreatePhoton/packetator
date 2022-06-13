@@ -30,7 +30,6 @@ class PcapReplayNetworkStackConfig
         // IP stack settings
         bool wait_for_arp_response = true; // Waits for ARP response when performing address resolution when sending an IP packet
 
-        bool same_side = false; // True if both NICs are on the same side of the device
         bool l3_device = false; // If true will add the correct routes so that external_gateway/16 can talk to internal_gateway/16
 
         // Address resolution
