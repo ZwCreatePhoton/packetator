@@ -1,4 +1,5 @@
 #include <iostream>
+#include <optional>
 
 #include "PcapReplayNetworkStack/pcap_replay_network_stack.h"
 #include "utils.h"
