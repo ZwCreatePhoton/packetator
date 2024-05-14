@@ -80,13 +80,13 @@ void TCPIPNetworkStack::output_packet(Tins::Packet &packet, std::string dest_ip,
             {
                 std::string _dmac;
                 int limit = runtime_arp_reponse_wait_limit; // 1 second total limit
-                const int sleep_duration = 10; // units of microseconds. // == 1 millisecond
+                const int sleep_duration = 10000; // units of microseconds. // == 10 millisecond
                 while (_dmac.empty())
                 {
                     _dmac = neighbor_table.lookup(_daddr);
                     usleep(sleep_duration);
-                    limit--;
-                    if (limit == 0)
+                    limit = limit - 10;
+                    if (limit <= 0)
                     {
                         std::cout << "[!]\tWe did not receive an ARP/NDP response in time!" << std::endl;
                         return;
