@@ -22,25 +22,43 @@ Tins::Sniffer * Networking::GetReciever(const std::string& interfaceName, const 
     bool no_ip = ip_address.empty();
     bool is_ipv4 = ip_address.find('.') != std::string::npos;
 
+    // Must not include the MAC address in the blocklist
     std::stringstream fmt;
     if (!mac_blocklist.empty())
     {
         for (auto &m : mac_blocklist)
             fmt << "(not ether host " << m << ") and ";
     }
-    fmt << "not ether src " << mac_address; // Dont capture our outgoing frames
-    fmt << " and ((ether dst " << mac_address << ") or ether multicast)"; // Capture all incoming frames destined for us (unicast or multicast or broadcast)
-    if (!no_ip)
-    {
-        fmt << " and ((dst " << ip_address << ") or ";
+
+    // Must include the MAC address of the interface or multicast as the destination
+    fmt << "( (ether dst " << mac_address << ") or ether multicast)";
+
+    // Must include at least one of the following:
+    fmt << " and ";
+    fmt << "(";
+        // 1. Src or Dst IP address of any other replaying host
+        if (!all_ipaddresses.empty())
+        {
+            for (auto &ip : all_ipaddresses)
+            {
+                if (ip == ip_address) continue;
+                fmt << "dst " << ip << " or src " << ip << " ";
+            }
+        }
+        // 2. ARP or RARP packets
         if (is_ipv4 && !all_ipaddresses.empty())
         {
             for (auto &ip : all_ipaddresses)
-                fmt << "arp host " << ip << " or rarp host " << ip << " or ";
+            {
+                fmt << " or ";
+                fmt << "arp host " << ip << " or rarp host " << ip ;
+            }
         }
-        fmt << (is_ipv4 ? "ip multicast" : "ip6 multicast"); // Capture incoming IPv4 packets destined to our unicast IPv4 address OR capture arp
-    }
+//        fmt << " or ";
+//        // 3. IP multicast packets
+//        fmt << (is_ipv4 ? "ip multicast" : "ip6 multicast");
     fmt << ")";
+
     //TODO: listen to specific (ipv6) multicast groups only (e.g. soliciatation)
     std::string filter = fmt.str();
     return SniffInterface(interfaceName, filter);

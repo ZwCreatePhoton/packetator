@@ -5,8 +5,11 @@
 
 #include "PcapReplayNetworkStack/pcap_replay_network_stack.h"
 
+// TODO: Capture only the packets that we process
+
 void PcapReplayNetworkStack::start_packet_capture()
 {
+
     bool is_ipv4 = netdev.ip_address.find('.') != std::string::npos;
 
     std::string pcap_output_path = convert_ip_address(netdev.ip_address, false) + "_" + netdev.ip_address + ".pcap";
@@ -17,15 +20,35 @@ void PcapReplayNetworkStack::start_packet_capture()
         for (auto &m : netdev.mac_blocklist)
             fmt << "(not ether host " << m << ") and ";
     }
-    fmt << "( (ether src " << netdev.mac_address << ")"; // capture our outgoing frames
-    fmt << " or ((ether dst " << netdev.mac_address << ") or ether multicast) )"; // Capture all incoming frames destined for us (unicast or multicast or broadcast)
-    fmt << " and ((dst " << netdev.ip_address << " or src " << netdev.ip_address << ") or ";
-    if (is_ipv4 && !netdev.all_ipaddresses.empty())
-    {
-        for (auto &ip : netdev.all_ipaddresses)
-            fmt << "arp host " << ip << " or rarp host " << ip << " or ";
-    }
-    fmt << (is_ipv4 ? "ip multicast" : "ip6 multicast") << ")"; // Capture incoming/outgoing IP packets destined to/from our unicast IP address OR capture arp OR capture IP multicast
+
+    // Must include the MAC address of the interface or multicast
+    fmt << "( (ether src " << netdev.mac_address << ") or ((ether dst "  << netdev.mac_address << ") or ether multicast) )"; // Capture all incoming frames destined for us (unicast or multicast or broadcast)
+
+    // Must include at least one of the following:
+    fmt << " and ";
+    fmt << "(";
+        // 1. Src or Dst IP address of any other replaying host
+        if (!netdev.all_ipaddresses.empty())
+        {
+            for (auto &ip : netdev.all_ipaddresses)
+            {
+                if (ip == netdev.ip_address) continue;
+                fmt << "dst " << ip << " or src " << ip << " ";
+            }
+        }
+        // 2. ARP or RARP packets
+        if (is_ipv4 && !netdev.all_ipaddresses.empty())
+        {
+            for (auto &ip : netdev.all_ipaddresses)
+            {
+                fmt << " or ";
+                fmt << "arp host " << ip << " or rarp host " << ip;
+            }
+        }
+//        fmt << " or ";
+//        // 3. IP multicast packets
+//        fmt << (is_ipv4 ? "ip multicast" : "ip6 multicast");
+    fmt << ")";
     std::string filter = fmt.str();
 
     packet_capture_sniffer = netdev.SniffInterface(filter);

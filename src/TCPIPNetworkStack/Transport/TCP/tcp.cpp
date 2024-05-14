@@ -12,13 +12,18 @@ void TCPIPNetworkStack::handle_tcp(Tins::Packet &packet)
     auto * connection = (TcpConnection *)connection_table.lookup(cs5t);
     if (connection == nullptr)
     {
-        // TODO: Setting to only add new connections when flags=S or SA
-        // Default would be true
-        // Motivation: replaying pcaps back to back with the same IP addresses against a DUT that doesn't probably close connections
-        // will (sometimes) result in a segfault since the connection table will become populated with connections from other runs.
-        connection = new TcpConnection(cs5t); //TODO: handle this memory leak
-        // TODO: lookup the Application to use for the server when we are listening on tcp.dst_port() and use that instead of DynamicApplication
-        connection_table.add(connection);
+        // Only create connections for SYN packets
+        // TODO: Need to also add a check for if there is an application with a socket open on the destination port
+        if ( tcp.flags() & Tins::TCP::SYN )
+        {
+            connection = new TcpConnection(cs5t); //TODO: handle this memory leak
+            // TODO: lookup the Application to use for the server when we are listening on tcp.dst_port() and use that instead of DynamicApplication
+            connection_table.add(connection);
+        }
+        else
+        {
+            return;
+        }
     }
     connection->update(packet);
 
