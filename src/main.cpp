@@ -122,7 +122,7 @@ void cmdline_run(int argc, char** argv)
         TCLAP::CmdLine cmd("Packet replay tool", ' ', "1.0");
 
         TCLAP::ValuesConstraint<std::string> allowed_ccmVals( {"FourTuple", "FiveTuple"} );
-        TCLAP::ValueArg<std::string> connection_conversion_method("","ccm","Connection conversion method. Defaults to FiveTuple.", false, "FiveTuple", &allowed_ccmVals, cmd);
+        TCLAP::ValueArg<std::string> connection_conversion_method("","ccm","Connection conversion method. Defaults to FiveTuple.", false, "FourTuple", &allowed_ccmVals, cmd);
         TCLAP::MultiArg<std::string> ip_addresses("a","address",R"(IP address of the host to be simulated followed by a comma "," and name of the interface to use for this host followed by (optionally) a comma "," and the mac address to use for this host)",true,"x.x.x.x,eth0,00:11:22:33:44:55", cmd);
         TCLAP::MultiArg<std::string> ip_address_map("m","map-address","Map IP address from the pcap to the IP address of the host to be simulated (format: 'x.x.x.x=y.y.y.y')",true,"x.x.x.x=y.y.y.y", cmd);
         TCLAP::ValueArg<std::string> pcapPath("p","pcap","filepath to the pcap to replay",true,"some.pcap","path/file.pcap", cmd);

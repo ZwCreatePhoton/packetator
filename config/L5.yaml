@@ -54,14 +54,14 @@ tx_event_ftp_reply_message: false
 
 modify_internet: true
 modify_transport: true
-modify_udp_sport_if_client: false
+modify_udp_sport_if_client: true
 modify_udp_dport_if_server: true
 modify_udp_dport_if_client: true
 modify_udp_sport_if_server: true
 modify_udp_data: true
 modify_udp_data_allow_shrinkage: true
 modify_udp_data_allow_growth: true
-modify_tcp_sport_if_client: false
+modify_tcp_sport_if_client: true
 modify_tcp_dport_if_server: true
 modify_seq: true
 modify_ack_2: true
