@@ -33,6 +33,14 @@ The network interfaces for the replay NICs need to be in the `UP` state.
 
 ### Network Configuration
 
+#### Using in-use IP addresses
+Packetator can be use IP addresses that are in use by the host. 
+However, by default the host's TCP stack will send a RST packet in response to packets lacking a destination socket. The RST packets can be disabled using the following iptables rule:
+```shell
+iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
+```
+Dropping RST packets is not required when using IP addresses that are not in use by the host.
+
 #### Promiscuous Mode (optional)
 Promiscuous mode must be enabled on any switches (e.g. [VMware vSwitch](https://kb.vmware.com/s/article/1002934)) connected to the packetator network to make use of the features:
 - Send/receive frames with MAC address other than the assigned MAC address.
